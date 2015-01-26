@@ -3027,6 +3027,8 @@ require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof requ
 
 },{}],"app":[function(require,module,exports){
 // Our Main JS file that puts it all together
+'use strict';
+
 var Backbone = require('backbone');
 
 module.exports = function () {
