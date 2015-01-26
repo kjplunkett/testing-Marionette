@@ -1,4 +1,4 @@
 # First Marionette Project
 ## Goals
-<del>1. Build a working Backbone app</del>
+<s>1. Build a working Backbone app</s>
 2. Integrate Marionette
