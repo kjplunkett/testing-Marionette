@@ -44,6 +44,11 @@ var CatView = Backbone.View.extend ({
 	// Bind this view to the catView id
 	el: '#catView',
 
+	initialize: function () {
+		// Render when anything changes
+		this.listenTo(this.model, 'change', this.render);
+	},
+
 	// Render function
 	render: function () {
 		this.$el.html(this.model.get('name'));
