@@ -15,3 +15,10 @@ var CatView = require('views/catView');
 
 module.exports = {	catsCollection: catsCollection,
 				 	CatView: CatView };
+
+/* Run these commands from Chrome terminal (one at a time)
+app = require('app');
+cat = app.catsCollection.get(1);
+view = new app.CatView({model: cat});
+document.body.appendChild(view.render().el);
+*/

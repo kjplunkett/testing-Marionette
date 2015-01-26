@@ -8,6 +8,20 @@
 <!-- Cat View -->
 <div id="catView"></div>
 
+<!-- Underscore template for Cat View -->
+<script type="text/html" id="cat-view-template">
+	<table>
+		<th>Name</th>
+		<th>Color</th>
+		<th>Age</th>
+		<tr>
+			<td><%= name %></td>
+			<td><%= color %></td>
+			<td><%= age %></td>
+		</tr>
+	</table>
+</script>
+
 <!-- Use Browserify Bundled JS -->
 <script src="static/bundle.js"></script>
 </body>

@@ -37,6 +37,7 @@ module.exports = CatModel;
 
 var $ = require('jquery');
 var Backbone = require('backbone');
+var _ = require('underscore');
 
 // Define Cat View
 var CatView = Backbone.View.extend ({
@@ -44,20 +45,32 @@ var CatView = Backbone.View.extend ({
 	// Bind this view to the catView id
 	el: '#catView',
 
+	// Use the Underscore template we put in the index html page
+	template: $('#cat-view-template').html(),
+
 	initialize: function () {
 		// Render when anything changes
 		this.listenTo(this.model, 'change', this.render);
 	},
 
 	// Render function
-	render: function () {
-		this.$el.html(this.model.get('name'));
+	render: function ()	{
+		// Compile Underscore template
+		var compiledTemplate = _.template(this.template);
+
+		// Render the template with the model data
+		var modelData = _.clone(this.model.attributes);
+		var html = compiledTemplate(modelData);
+
+		// Populate the view with the rendered html
+		this.$el.html(html);
+		
 		return this;
 	}
 });
 
 module.exports = CatView;
-},{"backbone":5,"jquery":7}],4:[function(require,module,exports){
+},{"backbone":5,"jquery":7,"underscore":8}],4:[function(require,module,exports){
 module.exports=[ 
 	{ "id": 1, "name": "John Ralfio", "color": "brown", "age": 4},
 	{ "id": 2, "name": "Ron Swanson", "color": "white", "age": 6},
@@ -12297,7 +12310,9 @@ return jQuery;
 
 }));
 
-},{}],"app":[function(require,module,exports){
+},{}],8:[function(require,module,exports){
+arguments[4][6][0].apply(exports,arguments)
+},{"dup":6}],"app":[function(require,module,exports){
 // Our Main JS file that puts it all together
 'use strict';
 
@@ -12315,4 +12330,11 @@ var CatView = require('views/catView');
 
 module.exports = {	catsCollection: catsCollection,
 				 	CatView: CatView };
+
+/* Run these commands from Chrome terminal (one at a time)
+app = require('app');
+cat = app.catsCollection.get(1);
+view = new app.CatView({model: cat});
+document.body.appendChild(view.render().el);
+*/
 },{"../cats.json":4,"backbone":5,"collections/catsCollection":1,"jquery":7,"views/catView":3}]},{},[]);
