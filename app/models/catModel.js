@@ -5,7 +5,7 @@ var Backbone = require('backbone');
 
 // Setup Backbone Cat Model
 var CatModel = Backbone.Model.extend({
-	
+		
 	defaults: {
 		name: '',
 		color: '',

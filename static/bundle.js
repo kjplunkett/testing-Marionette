@@ -1,4 +1,43 @@
 require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+// Cats Collection - Backbone Collection
+'use strict';
+
+var Backbone = require('backbone');
+var CatModel = require('models/catModel');
+
+// Define Collection
+var CatsCollection = Backbone.Collection.extend ({
+	// Set the model to CatModel
+	model: CatModel
+	
+});
+
+module.exports = CatsCollection;
+},{"backbone":4,"models/catModel":2}],2:[function(require,module,exports){
+// Basic Backbone Model for Cat
+'use strict';
+
+var Backbone = require('backbone');
+
+// Setup Backbone Cat Model
+var CatModel = Backbone.Model.extend({
+		
+	defaults: {
+		name: '',
+		color: '',
+		age: ''
+	}
+
+});
+
+module.exports = CatModel;
+},{"backbone":4}],3:[function(require,module,exports){
+module.exports=[ 
+	{ "id": 1, "name": "John Ralfio", "color": "brown", "age": 4},
+	{ "id": 2, "name": "Ron Swanson", "color": "white", "age": 6},
+	{ "id": 3, "name": "Tom Haverford", "color": "tan", "age": 1}
+]
+},{}],4:[function(require,module,exports){
 //     Backbone.js 1.1.2
 
 //     (c) 2010-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -1608,7 +1647,7 @@ require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof requ
 
 }));
 
-},{"underscore":2}],2:[function(require,module,exports){
+},{"underscore":5}],5:[function(require,module,exports){
 //     Underscore.js 1.7.0
 //     http://underscorejs.org
 //     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -3031,7 +3070,14 @@ require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof requ
 
 var Backbone = require('backbone');
 
-module.exports = function () {
-	return Backbone;
-};
-},{"backbone":1}]},{},[]);
+// Require my Cats Collection, inherently requires the model
+var CatsCollection = require('collections/catsCollection');
+
+// Require my sample Cat data
+var data = require('../cats.json');
+
+// Put that data into a new collection
+var catsCollection = new CatsCollection(data);
+
+module.exports = catsCollection;
+},{"../cats.json":3,"backbone":4,"collections/catsCollection":1}]},{},[]);
