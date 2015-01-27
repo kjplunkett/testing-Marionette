@@ -4,6 +4,7 @@
 
 'use strict';
 
+// Default requires for Backbone 
 var Backbone = require('backbone');
 var $ = require('jquery');
 Backbone.$ = $;
@@ -34,6 +35,15 @@ CatMVC.on('start', function () {
 	
 	// Test the app started
 	console.log('CatMVC started...');
+
+	// Create new MCatView and add it to the CatMVC's region
+	var mCatView = new MCatView ({
+		model: catsCollection.get(2)
+	});
+
+	// Show the Region
+	// Not calling the render function on views anymore because Marionette Regions take care of that
+	CatMVC.container.show(mCatView);
 
 });
 
