@@ -1,4 +1,47 @@
-require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+// Marionette JS file that puts it al together
+// Alternative to main.js
+
+'use strict';
+
+var Backbone = require('backbone');
+var $ = require('jquery');
+Backbone.$ = $;
+var Marionette = require('backbone.marionette');
+
+// Require my Cats Collection, inherently requires the model
+var CatsCollection = require('collections/catsCollection');
+
+// Require my sample Cat data
+var data = require('../cats.json');
+
+// Put that data into a new collection
+var catsCollection = new CatsCollection(data);
+
+// Require the Marionette Cat Item View
+var MCatView = require('views/mCatView');
+
+// Directly instantiate new Marionette application
+var CatMVC = new Backbone.Marionette.Application();
+
+// Create Marionette Region object for CatMVC
+CatMVC.addRegions ({
+	container: '#container'
+});
+
+// After initializers called
+CatMVC.on('start', function () {
+	
+	// Test the app started
+	console.log('CatMVC started...');
+
+});
+
+// Start the Cat MVC app
+CatMVC.start();
+
+module.exports = CatMVC;
+},{"../cats.json":5,"backbone":10,"backbone.marionette":6,"collections/catsCollection":2,"jquery":12,"views/mCatView":4}],2:[function(require,module,exports){
 // Cats Collection - Backbone Collection
 'use strict';
 
@@ -13,7 +56,7 @@ var CatsCollection = Backbone.Collection.extend ({
 });
 
 module.exports = CatsCollection;
-},{"backbone":9,"models/catModel":2}],2:[function(require,module,exports){
+},{"backbone":10,"models/catModel":3}],3:[function(require,module,exports){
 // Basic Backbone Model for Cat
 'use strict';
 
@@ -31,7 +74,7 @@ var CatModel = Backbone.Model.extend({
 });
 
 module.exports = CatModel;
-},{"backbone":9}],3:[function(require,module,exports){
+},{"backbone":10}],4:[function(require,module,exports){
 // Marionette ItemView for Cat Models
 'use strict';
 
@@ -39,6 +82,8 @@ var $ = require('jquery');
 var Backbone = require('backbone');
 var _ = require('underscore');
 var Marionette = require('backbone.marionette');
+// May not need to require our view, but putting it just in case
+var MCatView = require('views/mCatView');
 
 // Define the Marionette Item View
 var MCatView = Marionette.ItemView.extend ({
@@ -58,13 +103,13 @@ var MCatView = Marionette.ItemView.extend ({
 });
 
 module.exports = MCatView;
-},{"backbone":9,"backbone.marionette":5,"jquery":11,"underscore":12}],4:[function(require,module,exports){
+},{"backbone":10,"backbone.marionette":6,"jquery":12,"underscore":13,"views/mCatView":4}],5:[function(require,module,exports){
 module.exports=[ 
 	{ "id": 1, "name": "John Ralfio", "color": "brown", "age": 4},
 	{ "id": 2, "name": "Ron Swanson", "color": "white", "age": 6},
 	{ "id": 3, "name": "Tom Haverford", "color": "tan", "age": 1}
 ]
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 // MarionetteJS (Backbone.Marionette)
 // ----------------------------------
 // v2.3.1
@@ -3191,7 +3236,7 @@ module.exports=[
   return Marionette;
 }));
 
-},{"backbone":9,"backbone.babysitter":6,"backbone.wreqr":7,"underscore":8}],6:[function(require,module,exports){
+},{"backbone":10,"backbone.babysitter":7,"backbone.wreqr":8,"underscore":9}],7:[function(require,module,exports){
 // Backbone.BabySitter
 // -------------------
 // v0.1.6
@@ -3383,7 +3428,7 @@ module.exports=[
 
 }));
 
-},{"backbone":9,"underscore":8}],7:[function(require,module,exports){
+},{"backbone":10,"underscore":9}],8:[function(require,module,exports){
 // Backbone.Wreqr (Backbone.Marionette)
 // ----------------------------------
 // v1.3.1
@@ -3825,7 +3870,7 @@ module.exports=[
 
 }));
 
-},{"backbone":9,"underscore":8}],8:[function(require,module,exports){
+},{"backbone":10,"underscore":9}],9:[function(require,module,exports){
 //     Underscore.js 1.6.0
 //     http://underscorejs.org
 //     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -5170,7 +5215,7 @@ module.exports=[
   }
 }).call(this);
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 //     Backbone.js 1.1.2
 
 //     (c) 2010-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -6780,7 +6825,7 @@ module.exports=[
 
 }));
 
-},{"underscore":10}],10:[function(require,module,exports){
+},{"underscore":11}],11:[function(require,module,exports){
 //     Underscore.js 1.7.0
 //     http://underscorejs.org
 //     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -8197,7 +8242,7 @@ module.exports=[
   }
 }.call(this));
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.3
  * http://jquery.com/
@@ -17404,33 +17449,6 @@ return jQuery;
 
 }));
 
-},{}],12:[function(require,module,exports){
-arguments[4][10][0].apply(exports,arguments)
-},{"dup":10}],"app":[function(require,module,exports){
-// Our Main JS file that puts it all together
-'use strict';
-
-var Backbone = require('backbone');
-var $ = require('jquery');
-Backbone.$ = $;
-var Marionette = require('backbone.marionette');
-
-// Require my Cats Collection, inherently requires the model
-var CatsCollection = require('collections/catsCollection');
-// Require my sample Cat data
-var data = require('../cats.json');
-// Put that data into a new collection
-var catsCollection = new CatsCollection(data);
-// Require the Marionette Cat View
-var MCatView = require('views/mCatView');
-
-module.exports = {	catsCollection: catsCollection,
-				 	MCatView: MCatView };
-
-/* Run these commands from Chrome terminal (one at a time)
-app = require('app');
-cat = app.catsCollection.get(1);
-view = new app.MCatView({model: cat});
-document.body.appendChild(view.render().el);
-*/
-},{"../cats.json":4,"backbone":9,"backbone.marionette":5,"collections/catsCollection":1,"jquery":11,"views/mCatView":3}]},{},[]);
+},{}],13:[function(require,module,exports){
+arguments[4][11][0].apply(exports,arguments)
+},{"dup":11}]},{},[1]);

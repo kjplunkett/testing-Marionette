@@ -15,6 +15,7 @@ var catsCollection = new CatsCollection(data);
 // Require the Marionette Cat View
 var MCatView = require('views/mCatView');
 
+
 module.exports = {	catsCollection: catsCollection,
 				 	MCatView: MCatView };
 

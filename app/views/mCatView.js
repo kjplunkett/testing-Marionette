@@ -5,6 +5,8 @@ var $ = require('jquery');
 var Backbone = require('backbone');
 var _ = require('underscore');
 var Marionette = require('backbone.marionette');
+// May not need to require our view, but putting it just in case
+var MCatView = require('views/mCatView');
 
 // Define the Marionette Item View
 var MCatView = Marionette.ItemView.extend ({
