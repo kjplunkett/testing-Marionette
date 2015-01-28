@@ -2,4 +2,4 @@
 ## Goals
 <s>- Build a working Backbone app</s>
 
-- Integrate Marionette
+<s> - Integrate Marionette</s>
