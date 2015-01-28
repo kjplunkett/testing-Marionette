@@ -16,11 +16,13 @@ var MCatCompositeView = Backbone.Marionette.CompositeView.extend ({
 	// Specify jQuery selector to put the 'childView' instances into
 	childViewContainer: 'tbody',
 
-	template: '#table-template',
+	template: '#table-template'
 
+	/*
 	initialize: function () {
 		console.log("Composite View initialized");
 	}
+	*/
 });
 
 module.exports = MCatCompositeView;
