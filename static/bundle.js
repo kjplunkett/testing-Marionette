@@ -22,7 +22,7 @@ var catsCollection = new CatsCollection(data);
 // Require the Marionette Cat Item View
 var MCatView = require('views/mCatView');
 
-// Directly instantiate new Marionette application
+// Directly instantiate new Marionette application CatMVC
 var CatMVC = new Backbone.Marionette.Application();
 
 // Create Marionette Region object for CatMVC
@@ -30,21 +30,19 @@ CatMVC.addRegions ({
 	container: '#container'
 });
 
-// After initializers called
 CatMVC.on('start', function () {
 	
 	// Test the app started
 	console.log('CatMVC started...');
-
-	// Create new MCatView and add it to the CatMVC's region
-	var mCatView = new MCatView ({
-		model: catsCollection.get(1)
+	
+	// Initialize new Item view
+	var mCatView = new MCatView({
+		model: catsCollection.get(2)
 	});
-
-	// Show the Region
-	// Not calling the render function on views anymore because Marionette Regions take care of that
+	
+	// Show the Item View in the container Region
 	CatMVC.container.show(mCatView);
-
+	
 });
 
 // Start the Cat MVC app
@@ -92,16 +90,15 @@ var $ = require('jquery');
 var Backbone = require('backbone');
 var _ = require('underscore');
 var Marionette = require('backbone.marionette');
-// May not need to require our view, but putting it just in case
-var MCatView = require('views/mCatView');
 
 // Define the Marionette Item View
 var MCatView = Marionette.ItemView.extend ({
 	
-	// Bind the view to the catView div
-	el: '#catView',
+	// Bind the view to the container div
+	// Testing if ItemView's work without an 'el' defined
+	//el: 'body',
 
-	// Load in the Underscore template
+	// Load in the Underscore template for each table row
 	template: '#cat-view-template',
 
 	initialize: function () {
@@ -113,7 +110,7 @@ var MCatView = Marionette.ItemView.extend ({
 });
 
 module.exports = MCatView;
-},{"backbone":10,"backbone.marionette":6,"jquery":12,"underscore":13,"views/mCatView":4}],5:[function(require,module,exports){
+},{"backbone":10,"backbone.marionette":6,"jquery":12,"underscore":13}],5:[function(require,module,exports){
 module.exports=[ 
 	{ "id": 1, "name": "John Ralfio", "color": "brown", "age": 4},
 	{ "id": 2, "name": "Ron Swanson", "color": "white", "age": 6},

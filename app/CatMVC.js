@@ -21,9 +21,6 @@ var catsCollection = new CatsCollection(data);
 // Require the Marionette Cat Item View
 var MCatView = require('views/mCatView');
 
-// Require the Marionette Cat Layout View
-var CatLayoutView = require('views/catLayoutView');
-
 // Directly instantiate new Marionette application CatMVC
 var CatMVC = new Backbone.Marionette.Application();
 
@@ -36,21 +33,15 @@ CatMVC.on('start', function () {
 	
 	// Test the app started
 	console.log('CatMVC started...');
-
-	// Create an instance of the CatLayoutView
-	var catLayoutView = new CatLayoutView({
+	
+	// Initialize new Item view
+	var mCatView = new MCatView({
 		model: catsCollection.get(2)
 	});
-		
-	// Render the layout view
-	catLayoutView.render();
-
-	// Create new Item view
-	var mCatView = new MCatView({ model: catsCollection.get(2) });
 	
-	// Put the new Item view into the appropriate region
-	catLayoutView.getRegion('tableRow').show(mCatView);
-
+	// Show the Item View in the container Region
+	CatMVC.container.show(mCatView);
+	
 });
 
 // Start the Cat MVC app

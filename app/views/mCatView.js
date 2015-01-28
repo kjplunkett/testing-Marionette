@@ -10,11 +10,12 @@ var Marionette = require('backbone.marionette');
 var MCatView = Marionette.ItemView.extend ({
 	
 	// Bind the view to the container div
-	el: body,
-
+	// Testing if ItemView's work without an 'el' defined
+	//el: 'body',
+	
 	// Load in the Underscore template for each table row
-	template: '#item-view-template',
-
+	template: '#cat-view-template',
+	
 	initialize: function () {
 		// bind this model change to re-render the view	
 		this.listenTo(this.model, 'change', this.render);
