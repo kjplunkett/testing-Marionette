@@ -5,7 +5,7 @@ In terminal, go to the root directory:
 
 1. `npm install`
 
-2. `browserify ./app/CatMVC.js > static/bundle.js~`
+2. `browserify ./app/CatMVC.js > static/bundle.js`
 
 3. `http-server~`
 
