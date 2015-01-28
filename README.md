@@ -11,7 +11,7 @@ In terminal, go to the root directory:
 
 In your web browser
 
-4. Go to `localhost:8008` 
+4. Go to `localhost:8080` 
 
 ## Goals
 <s>- Build a working Backbone app</s>
