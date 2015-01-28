@@ -7,7 +7,7 @@ In terminal, go to the root directory:
 
 2. `browserify ./app/CatMVC.js > static/bundle.js`
 
-3. `http-server~`
+3. `http-server`
 
 In your web browser
 
