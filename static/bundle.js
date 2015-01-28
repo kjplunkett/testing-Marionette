@@ -22,6 +22,9 @@ var catsCollection = new CatsCollection(data);
 // Require the Marionette Cat Item View
 var MCatView = require('views/mCatView');
 
+// Require the Marionette Cat Composite View
+var MCatCompositeView = require('views/mCatCompositeView');
+
 // Directly instantiate new Marionette application CatMVC
 var CatMVC = new Backbone.Marionette.Application();
 
@@ -34,22 +37,22 @@ CatMVC.on('start', function () {
 	
 	// Test the app started
 	console.log('CatMVC started...');
-	
-	// Initialize new Item view
-	var mCatView = new MCatView({
-		model: catsCollection.get(2)
+
+	// Create a new Composite View
+	var mCatCompositeView = new MCatCompositeView({ 
+		childView: new MCatView({ model: catsCollection.get(2) })
 	});
-	
-	// Show the Item View in the container Region
-	CatMVC.container.show(mCatView);
-	
+
+	// Show the Composite View in the container Region
+	CatMVC.container.show(mCatCompositeView);
+
 });
 
 // Start the Cat MVC app
 CatMVC.start();
 
 module.exports = CatMVC;
-},{"../cats.json":5,"backbone":10,"backbone.marionette":6,"collections/catsCollection":2,"jquery":12,"views/mCatView":4}],2:[function(require,module,exports){
+},{"../cats.json":6,"backbone":11,"backbone.marionette":7,"collections/catsCollection":2,"jquery":13,"views/mCatCompositeView":4,"views/mCatView":5}],2:[function(require,module,exports){
 // Cats Collection - Backbone Collection
 'use strict';
 
@@ -64,7 +67,7 @@ var CatsCollection = Backbone.Collection.extend ({
 });
 
 module.exports = CatsCollection;
-},{"backbone":10,"models/catModel":3}],3:[function(require,module,exports){
+},{"backbone":11,"models/catModel":3}],3:[function(require,module,exports){
 // Basic Backbone Model for Cat
 'use strict';
 
@@ -82,7 +85,34 @@ var CatModel = Backbone.Model.extend({
 });
 
 module.exports = CatModel;
-},{"backbone":10}],4:[function(require,module,exports){
+},{"backbone":11}],4:[function(require,module,exports){
+// Marionette Composite View for rendering Cat Collection
+'use strict';
+
+var $ = require('jquery');
+var Backbone = require('backbone');
+var _ = require('underscore');
+var Marionette = require('backbone.marionette');
+var MCatView = require('views/mCatView');
+
+// Define a new Composite View, MCatCompositeView
+var MCatCompositeView = Backbone.Marionette.CompositeView.extend ({
+
+	// Set the chield view to MCatView
+	childView: MCatView,
+
+	// Specify jQuery selector to put the 'childView' instances into
+	childViewContainer: 'tbody',
+
+	template: '#table-template',
+
+	initialize: function () {
+		console.log("Composite View initialized");
+	}
+});
+
+module.exports = MCatCompositeView;
+},{"backbone":11,"backbone.marionette":7,"jquery":13,"underscore":14,"views/mCatView":5}],5:[function(require,module,exports){
 // Marionette ItemView for Cat Models
 'use strict';
 
@@ -94,29 +124,29 @@ var Marionette = require('backbone.marionette');
 // Define the Marionette Item View
 var MCatView = Marionette.ItemView.extend ({
 	
-	// Bind the view to the container div
-	// Testing if ItemView's work without an 'el' defined
-	//el: 'body',
+	// Create a new <tr> tag instead of <div>
+	tagName: 'tr',
 
 	// Load in the Underscore template for each table row
-	template: '#cat-view-template',
+	template: '#row-template',
 
 	initialize: function () {
 		// bind this model change to re-render the view	
 		this.listenTo(this.model, 'change', this.render);
+		console.log('Item View initialized');
 	}
 
 	// Letting the default Marionette Render function handle the rest
 });
 
 module.exports = MCatView;
-},{"backbone":10,"backbone.marionette":6,"jquery":12,"underscore":13}],5:[function(require,module,exports){
+},{"backbone":11,"backbone.marionette":7,"jquery":13,"underscore":14}],6:[function(require,module,exports){
 module.exports=[ 
 	{ "id": 1, "name": "John Ralfio", "color": "brown", "age": 4},
 	{ "id": 2, "name": "Ron Swanson", "color": "white", "age": 6},
 	{ "id": 3, "name": "Tom Haverford", "color": "tan", "age": 1}
 ]
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 // MarionetteJS (Backbone.Marionette)
 // ----------------------------------
 // v2.3.1
@@ -3243,7 +3273,7 @@ module.exports=[
   return Marionette;
 }));
 
-},{"backbone":10,"backbone.babysitter":7,"backbone.wreqr":8,"underscore":9}],7:[function(require,module,exports){
+},{"backbone":11,"backbone.babysitter":8,"backbone.wreqr":9,"underscore":10}],8:[function(require,module,exports){
 // Backbone.BabySitter
 // -------------------
 // v0.1.6
@@ -3435,7 +3465,7 @@ module.exports=[
 
 }));
 
-},{"backbone":10,"underscore":9}],8:[function(require,module,exports){
+},{"backbone":11,"underscore":10}],9:[function(require,module,exports){
 // Backbone.Wreqr (Backbone.Marionette)
 // ----------------------------------
 // v1.3.1
@@ -3877,7 +3907,7 @@ module.exports=[
 
 }));
 
-},{"backbone":10,"underscore":9}],9:[function(require,module,exports){
+},{"backbone":11,"underscore":10}],10:[function(require,module,exports){
 //     Underscore.js 1.6.0
 //     http://underscorejs.org
 //     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -5222,7 +5252,7 @@ module.exports=[
   }
 }).call(this);
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 //     Backbone.js 1.1.2
 
 //     (c) 2010-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -6832,7 +6862,7 @@ module.exports=[
 
 }));
 
-},{"underscore":11}],11:[function(require,module,exports){
+},{"underscore":12}],12:[function(require,module,exports){
 //     Underscore.js 1.7.0
 //     http://underscorejs.org
 //     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -8249,7 +8279,7 @@ module.exports=[
   }
 }.call(this));
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.3
  * http://jquery.com/
@@ -17456,6 +17486,6 @@ return jQuery;
 
 }));
 
-},{}],13:[function(require,module,exports){
-arguments[4][11][0].apply(exports,arguments)
-},{"dup":11}]},{},[1]);
+},{}],14:[function(require,module,exports){
+arguments[4][12][0].apply(exports,arguments)
+},{"dup":12}]},{},[1]);
