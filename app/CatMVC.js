@@ -1,4 +1,4 @@
-// Marionette JS file that puts it al together
+// Marionette JS file that puts it all together
 // Alternative to main.js
 
 'use strict';
@@ -21,7 +21,10 @@ var catsCollection = new CatsCollection(data);
 // Require the Marionette Cat Item View
 var MCatView = require('views/mCatView');
 
-// Directly instantiate new Marionette application
+// Require the Marionette Cat Layout View
+var CatLayoutView = require('views/catLayoutView');
+
+// Directly instantiate new Marionette application CatMVC
 var CatMVC = new Backbone.Marionette.Application();
 
 // Create Marionette Region object for CatMVC
@@ -29,20 +32,24 @@ CatMVC.addRegions ({
 	container: '#container'
 });
 
-// After initializers called
 CatMVC.on('start', function () {
 	
 	// Test the app started
 	console.log('CatMVC started...');
 
-	// Create new MCatView and add it to the CatMVC's region
-	var mCatView = new MCatView ({
+	// Create an instance of the CatLayoutView
+	var catLayoutView = new CatLayoutView({
 		model: catsCollection.get(2)
 	});
+		
+	// Render the layout view
+	catLayoutView.render();
 
-	// Show the Region
-	// Not calling the render function on views anymore because Marionette Regions take care of that
-	CatMVC.container.show(mCatView);
+	// Create new Item view
+	var mCatView = new MCatView({ model: catsCollection.get(2) });
+	
+	// Put the new Item view into the appropriate region
+	catLayoutView.getRegion('tableRow').show(mCatView);
 
 });
 

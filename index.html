@@ -4,14 +4,31 @@
 	<meta charset="utf-8">
 </head>
 <body>
+
 <!-- Main Container -->
 <div id="container">
-	<!-- Cat View -->
-	<div id="catView"></div>
 	
 </div>
 
-<!-- Underscore template for Cat View -->
+<!-- Cat Layout View Template -->
+<script type="text/template" id="layout-view-template">
+	<table>
+		<th>Name</th>
+		<th>Color</th>
+		<th>Age</th>
+		<tr id="tableRow">
+		</tr>
+	</table>
+</script>
+
+<!-- Cat Item View Template -->
+<script type="text/template" id="item-view-template">
+	<td><%= name %></td>
+	<td><%= color %></td>
+	<td><%= age %></td>
+</script>
+
+<!-- OLD Underscore template for Cat View -->
 <script type="text/html" id="cat-view-template">
 	<table>
 		<th>Name</th>
@@ -23,9 +40,10 @@
 			<td><%= age %></td>
 		</tr>
 	</table>
-</script>	
+</script>
 
 <!-- Use Browserify Bundled JS -->
 <script src="static/bundle.js"></script>
+
 </body>
 </html>
